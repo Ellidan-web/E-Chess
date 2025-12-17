@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>E-Chess - Play Chess | AI Opponent & Two Player Mode</title>
+    <meta name="description" content="Play chess online with our beautiful Chess Master app. Features AI opponent with multiple difficulty levels, two-player mode, customizable time controls, and full game analysis." />
+    <meta name="keywords" content="chess, online chess, play chess, chess game, chess AI, two player chess" />
+    <meta name="author" content="E-Chess" />
+    <link rel="canonical" href="/" />
+    
+    <meta property="og:title" content="E-Chess -Chess Game" />
+    <meta property="og:description" content="Beautiful chess application with AI opponent, two-player mode, and game analysis." />
+    <meta property="og:type" content="website" />
+    
+    <link rel="icon" type="image/x-icon" href="/chess_logo.webp" />
+    
+    <!-- Add this style tag to zoom out the entire page ONLY ON DESKTOP -->
+    <style>
+      /* This only applies to screens 1024px and wider (desktop) */
+      @media (min-width: 1080px) {
+        html {
+          zoom: 0.82; /* Desktop zoom: 85% */
+        }
+      }
+      
+      /* For screens smaller than 1024px (mobile/tablet) */
+      @media (max-width: 1023px) {
+        html {
+          zoom: 1; /* Normal 100% zoom on mobile */
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

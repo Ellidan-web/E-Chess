@@ -1,0 +1,240 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Work+Sans:wght@300;400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Chess board colors */
+    --square-light: 43 31% 80%;
+    --square-dark: 30 35% 35%;
+    --square-highlight: 45 100% 50%;
+    --square-move: 120 60% 50%;
+    --square-check: 0 80% 55%;
+    --square-last-move: 45 80% 70%;
+    
+    /* Main palette - warm sophisticated */
+    --background: 30 15% 95%;
+    --foreground: 30 10% 15%;
+    
+    --card: 30 20% 98%;
+    --card-foreground: 30 10% 15%;
+    
+    --popover: 30 20% 98%;
+    --popover-foreground: 30 10% 15%;
+    
+    --primary: 30 35% 30%;
+    --primary-foreground: 43 31% 95%;
+    
+    --secondary: 43 20% 90%;
+    --secondary-foreground: 30 35% 25%;
+    
+    --muted: 30 15% 90%;
+    --muted-foreground: 30 10% 45%;
+    
+    --accent: 45 90% 50%;
+    --accent-foreground: 30 35% 15%;
+    
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 30 20% 82%;
+    --input: 30 20% 85%;
+    --ring: 45 90% 50%;
+    
+    --radius: 0.75rem;
+    
+    /* Chess specific */
+    --piece-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    --board-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    --evaluation-white: 0 0% 95%;
+    --evaluation-black: 0 0% 15%;
+    
+    /* Sidebar */
+    --sidebar-background: 30 20% 96%;
+    --sidebar-foreground: 30 10% 25%;
+    --sidebar-primary: 30 35% 30%;
+    --sidebar-primary-foreground: 43 31% 95%;
+    --sidebar-accent: 43 30% 92%;
+    --sidebar-accent-foreground: 30 35% 25%;
+    --sidebar-border: 30 20% 85%;
+    --sidebar-ring: 45 90% 50%;
+  }
+  
+  .dark {
+    --square-light: 43 20% 55%;
+    --square-dark: 30 30% 22%;
+    --square-highlight: 45 100% 45%;
+    --square-move: 120 50% 40%;
+    --square-check: 0 70% 45%;
+    --square-last-move: 45 60% 40%;
+    
+    --background: 30 15% 8%;
+    --foreground: 30 10% 90%;
+    
+    --card: 30 15% 12%;
+    --card-foreground: 30 10% 90%;
+    
+    --popover: 30 15% 12%;
+    --popover-foreground: 30 10% 90%;
+    
+    --primary: 43 31% 75%;
+    --primary-foreground: 30 35% 10%;
+    
+    --secondary: 30 20% 18%;
+    --secondary-foreground: 43 20% 85%;
+    
+    --muted: 30 15% 18%;
+    --muted-foreground: 30 10% 60%;
+    
+    --accent: 45 80% 55%;
+    --accent-foreground: 30 35% 10%;
+    
+    --destructive: 0 60% 45%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 30 15% 22%;
+    --input: 30 15% 22%;
+    --ring: 45 80% 55%;
+    
+    --evaluation-white: 0 0% 85%;
+    --evaluation-black: 0 0% 25%;
+    
+    --sidebar-background: 30 15% 10%;
+    --sidebar-foreground: 30 10% 85%;
+    --sidebar-primary: 43 31% 75%;
+    --sidebar-primary-foreground: 30 35% 10%;
+    --sidebar-accent: 30 20% 16%;
+    --sidebar-accent-foreground: 43 20% 85%;
+    --sidebar-border: 30 15% 20%;
+    --sidebar-ring: 45 80% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Work Sans', sans-serif;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+  }
+}
+
+@layer components {
+  .chess-square-light {
+    @apply bg-[hsl(var(--square-light))];
+  }
+  
+  .chess-square-dark {
+    @apply bg-[hsl(var(--square-dark))];
+  }
+  
+  .chess-square-highlight {
+    @apply ring-4 ring-inset ring-[hsl(var(--square-highlight))];
+  }
+  
+  .chess-square-move {
+    position: relative;
+  }
+  
+  .chess-square-move::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30%;
+    height: 30%;
+    border-radius: 50%;
+    background: hsl(var(--square-move) / 0.6);
+  }
+  
+  .chess-square-capture::after {
+    width: 90%;
+    height: 90%;
+    background: transparent;
+    border: 6px solid hsl(var(--square-move) / 0.6);
+  }
+  
+  .chess-square-check {
+    @apply bg-[hsl(var(--square-check))] !important;
+  }
+  
+  .chess-square-last-move {
+    @apply bg-[hsl(var(--square-last-move))] !important;
+  }
+  
+  .chess-piece {
+    filter: drop-shadow(2px 4px 4px rgba(0, 0, 0, 0.3));
+    transition: transform 0.15s ease-out;
+    cursor: grab;
+  }
+  
+  .chess-piece:active {
+    cursor: grabbing;
+  }
+  
+  .chess-piece-dragging {
+    transform: scale(1.15);
+    z-index: 100;
+  }
+  
+  .chess-board {
+    box-shadow: var(--board-shadow);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  
+  .evaluation-bar {
+    background: linear-gradient(
+      to top,
+      hsl(var(--evaluation-black)) var(--black-percent, 50%),
+      hsl(var(--evaluation-white)) var(--black-percent, 50%)
+    );
+  }
+}
+
+@layer utilities {
+  .text-display {
+    font-family: 'Playfair Display', serif;
+  }
+  
+  .animate-piece-move {
+    animation: pieceMove 0.2s ease-out;
+  }
+  
+  @keyframes pieceMove {
+    from {
+      transform: scale(1.1);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
+  
+  .animate-capture {
+    animation: captureEffect 0.3s ease-out;
+  }
+  
+  @keyframes captureEffect {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+  }
+  
+  .animate-check {
+    animation: checkPulse 0.5s ease-out;
+  }
+  
+  @keyframes checkPulse {
+    0%, 100% { box-shadow: none; }
+    50% { box-shadow: 0 0 20px hsl(var(--square-check)); }
+  }
+}
