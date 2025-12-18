@@ -26,8 +26,8 @@ export const GameStatus = memo(function GameStatus({
         return 'Draw';
       case 'timeout':
         return `Time out! ${winner === 'w' ? 'White' : 'Black'} wins!`;
-        case 'resign':
-  return `${winner === 'w' ? 'White' : 'Black'} wins by resignation!`;
+      case 'resign':
+        return `${winner === 'w' ? 'White' : 'Black'} wins by resignation!`;
       case 'playing':
         if (isCheck) {
           return `${turn === 'w' ? 'White' : 'Black'} is in check!`;
@@ -39,15 +39,18 @@ export const GameStatus = memo(function GameStatus({
   const isGameOver = status !== 'playing';
 
   return (
-    <div
-      className={cn(
-        'px-4 py-2 rounded-lg text-center font-medium transition-all',
-        isGameOver && 'bg-accent text-accent-foreground animate-scale-in',
-        isCheck && !isGameOver && 'bg-destructive/10 text-destructive',
-        !isCheck && !isGameOver && 'bg-secondary text-secondary-foreground'
-      )}
-    >
-      {getStatusText()}
+    <div className="flex justify-center">
+<div
+  className={cn(
+    'px-4 py-2 rounded-lg text-center font-medium transition-all',
+    'max-w-md ml-2', // Added ml-4 for left margin
+    isGameOver && 'bg-accent text-accent-foreground animate-scale-in',
+    isCheck && !isGameOver && 'bg-destructive/10 text-destructive',
+    !isCheck && !isGameOver && 'bg-secondary text-secondary-foreground'
+  )}
+>
+  {getStatusText()}
+</div>
     </div>
   );
 });
