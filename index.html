@@ -24,12 +24,22 @@
         }
       }
       
-      /* For screens smaller than 1024px (mobile/tablet) */
-      @media (max-width: 1023px) {
-        html {
-          zoom: 1; /* Normal 100% zoom on mobile */
-        }
-      }
+  /* Tablet & Mobile */
+  @media (max-width: 1079px) {
+    html {
+      zoom: 1;
+    }
+
+    body {
+      overflow-x: hidden;
+    }
+
+    #root {
+      width: 100%;
+      max-width: 100vw;
+      overflow-x: hidden;
+    }
+  }
     </style>
   </head>
   <body>

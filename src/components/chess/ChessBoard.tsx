@@ -1,4 +1,4 @@
-import { memo, useCallback, useMemo, useState } from 'react';
+import { memo, useCallback, useMemo, useState, useEffect, useRef } from 'react';
 import { Square, Move, Color } from 'chess.js';
 import { ChessSquare } from './ChessSquare';
 import { GameState } from '@/lib/chess-engine';
@@ -23,11 +23,59 @@ export const ChessBoard = memo(function ChessBoard({
   legalMoves,
   lastMove,
   flipped = false,
-  squareSize = 72,
+  squareSize: initialSquareSize = 72,
   onSquareClick,
   onMove,
 }: ChessBoardProps) {
   const [draggingFrom, setDraggingFrom] = useState<Square | null>(null);
+  const [responsiveSquareSize, setResponsiveSquareSize] = useState(initialSquareSize);
+  const boardRef = useRef<HTMLDivElement>(null);
+
+  // Calculate responsive square size based on screen width and height
+  useEffect(() => {
+    const calculateSquareSize = () => {
+      if (typeof window === 'undefined') return initialSquareSize;
+      
+      const screenWidth = window.innerWidth;
+      const screenHeight = window.innerHeight;
+      
+      // Calculate based on the smaller dimension to ensure board fits both ways
+      const availableWidth = screenWidth;
+      const availableHeight = screenHeight;
+      
+      // Use 92% of available space for better margins
+      const maxBoardWidth = Math.min(availableWidth * 0.92, availableHeight * 0.92);
+      const calculatedSize = Math.floor(maxBoardWidth / 8);
+      
+      // Set minimum and maximum sizes
+      const minSize = 36; // Minimum 36px for touch targets
+      const maxSize = 80; // Maximum 80px for larger screens
+      
+      return Math.max(minSize, Math.min(calculatedSize, maxSize));
+    };
+
+    const handleResize = () => {
+      setResponsiveSquareSize(calculateSquareSize());
+    };
+
+    // Calculate initial size
+    handleResize();
+    
+    // Add resize listener with debounce
+    let resizeTimeout: NodeJS.Timeout;
+    const handleResizeDebounced = () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(handleResize, 100);
+    };
+    
+    window.addEventListener('resize', handleResizeDebounced);
+    
+    // Cleanup
+    return () => {
+      window.removeEventListener('resize', handleResizeDebounced);
+      clearTimeout(resizeTimeout);
+    };
+  }, [initialSquareSize]);
 
   const board = useMemo(() => {
     const files = flipped ? [...FILES].reverse() : FILES;
@@ -110,36 +158,46 @@ export const ChessBoard = memo(function ChessBoard({
   }, [onMove]);
 
   return (
-    <div 
-      className="chess-board grid grid-cols-8"
-      style={{ width: squareSize * 8, height: squareSize * 8 }}
-    >
-      {board.map(({ square, isLight }) => {
-        const piece = boardData[square];
-        const isSelected = square === selectedSquare;
-        const isLegalMove = legalMoveSquares.has(square);
-        const isLastMoveSquare = lastMove && (square === lastMove.from || square === lastMove.to);
-        const isCheck = square === kingInCheckSquare;
+    <div className="w-full h-full min-h-[300px] p-2 sm:p-4">
+      <div 
+  ref={boardRef}
+  className="chess-board grid grid-cols-8 bg-gray-800 rounded-lg overflow-hidden shadow-xl mx-auto"
+  style={{ 
+    width: `${responsiveSquareSize * 8}px`,
+    height: `${responsiveSquareSize * 8}px`,
+    aspectRatio: '1/1',
+    maxWidth: 'calc(100vw - 32px)',
+    maxHeight: 'calc(100vh - 32px)',
+    transform: 'translateX(-6px)' // 👈 MOVE LEFT (adjust value)
+  }}
+>
+        {board.map(({ square, isLight }) => {
+          const piece = boardData[square];
+          const isSelected = square === selectedSquare;
+          const isLegalMove = legalMoveSquares.has(square);
+          const isLastMoveSquare = lastMove && (square === lastMove.from || square === lastMove.to);
+          const isCheck = square === kingInCheckSquare;
 
-        return (
-          <ChessSquare
-            key={square}
-            square={square}
-            piece={piece}
-            isLight={isLight}
-            isSelected={isSelected}
-            isLegalMove={isLegalMove}
-            isLastMove={!!isLastMoveSquare}
-            isCheck={isCheck}
-            legalMoves={legalMoves}
-            squareSize={squareSize}
-            onSquareClick={onSquareClick}
-            onDragStart={handleDragStart}
-            onDragEnd={handleDragEnd}
-            onDrop={handleDrop}
-          />
-        );
-      })}
+          return (
+            <ChessSquare
+              key={square}
+              square={square}
+              piece={piece}
+              isLight={isLight}
+              isSelected={isSelected}
+              isLegalMove={isLegalMove}
+              isLastMove={!!isLastMoveSquare}
+              isCheck={isCheck}
+              legalMoves={legalMoves}
+              squareSize={responsiveSquareSize}
+              onSquareClick={onSquareClick}
+              onDragStart={handleDragStart}
+              onDragEnd={handleDragEnd}
+              onDrop={handleDrop}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 });
