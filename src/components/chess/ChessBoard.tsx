@@ -168,7 +168,7 @@ export const ChessBoard = memo(function ChessBoard({
     aspectRatio: '1/1',
     maxWidth: 'calc(100vw - 32px)',
     maxHeight: 'calc(100vh - 32px)',
-    transform: 'translateX(-10px)' // 👈 MOVE LEFT (adjust value)
+    transform: 'translateX(-12px)' // 👈 MOVE LEFT (adjust value)
   }}
 >
         {board.map(({ square, isLight }) => {
