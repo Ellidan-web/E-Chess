@@ -4,26 +4,13 @@
 
 E-Chess is a modern developer toolkit for building interactive, scalable chess applications using React and TypeScript. It provides a clean development environment, a rich set of reusable UI components, and an evolving chess game engine—allowing developers to focus on crafting high-quality chess experiences.
 
-## 🚀 Why E-Chess?
-
-E-Chess streamlines the creation of feature-rich chess applications by combining:
-
-⚡ Fast development with Vite
-
-🎨 Consistent UI with reusable components
-
-♿ Accessibility-focused design
-
-♟️ Extensible chess game logic
-
 ## ✨ Features & Status
 Feature	Status
-Component Library	✅ Ready
-Developer Experience	✅ Ready
-Game Engine	🔄 In Progress
-Responsive & Accessible UI	🔄 In Progress
-Notifications & Sound	🔄 In Progress
-✅ Available Now
+Component Library - Ready
+Developer Experience - Ready
+Game Engine	- In Progress
+Responsive & Accessible UI - In Progress
+Notifications & Sound	- In Progress
 
 Component Library – Reusable and accessible UI components (buttons, dialogs, navigation, etc.)
 
@@ -145,3 +132,4 @@ Contributions are welcome!
 Open an issue for bugs or feature requests
 
 Submit a pull request for improvements
+
