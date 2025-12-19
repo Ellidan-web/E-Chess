@@ -142,62 +142,66 @@ export function ChessGame() {
       </header>
 
       {/* Main Content */}
-{/* Main Content */}
-<main className="container mx-auto px-4 py-6">
-  <div className="flex flex-col lg:flex-row gap-6 items-start justify-center">
-    {/* Chess Board Section */}
-    <div className="flex flex-col gap-4">
-      {/* Top Player Info */}
-      <div className="flex items-center justify-between">
-        <CapturedPieces
-          pieces={isBoardFlipped ? gameState.capturedPieces.black : gameState.capturedPieces.white}
-          color={isBoardFlipped ? 'b' : 'w'}
-        />
-        {gameOptions.timeControl && (
-          <ChessClock
-            whiteTime={whiteTime}
-            blackTime={blackTime}
-            turn={gameState.turn}
-            isRunning={isClockRunning}
-            flipped={isBoardFlipped}
-          />
-        )}
-      </div>
+      <main className="container mx-auto px-4 py-6">
+        <div className="flex flex-col lg:flex-row gap-6 items-start justify-center">
+          {/* Chess Board Section */}
+          <div className="flex flex-col gap-4">
+            {/* Top Player Info */}
+            <div className="flex items-center justify-between">
+              <CapturedPieces
+                pieces={isBoardFlipped ? gameState.capturedPieces.black : gameState.capturedPieces.white}
+                color={isBoardFlipped ? 'b' : 'w'}
+              />
+              {/* Only show clock in PvP mode or for opponent in AI mode */}
+              {gameOptions.timeControl && (
+                <ChessClock
+                  whiteTime={whiteTime}
+                  blackTime={blackTime}
+                  turn={gameState.turn}
+                  isRunning={isClockRunning}
+                  flipped={isBoardFlipped}
+                  isAiMode={gameOptions.mode === 'ai'}
+                  playerColor={gameOptions.playerColor}
+                />
+              )}
+            </div>
 
-      {/* Game Status */}
-      <GameStatus
-        status={gameState.status}
-        turn={gameState.turn}
-        winner={gameState.winner}
-        isCheck={gameState.isCheck}
-      />
+            {/* Game Status */}
+            <GameStatus
+              status={gameState.status}
+              turn={gameState.turn}
+              winner={gameState.winner}
+              isCheck={gameState.isCheck}
+            />
 
-      {/* Chess Board */}
-      <div className="flex items-center">
-        {/* Desktop Evaluation Bar - now placed to the LEFT of the board */}
-        <div className="hidden lg:block mr-4">
-          <EvaluationBar score={evaluation} height={576} />
-        </div>
-        
-        <ChessBoard
-          gameState={gameState}
-          selectedSquare={selectedSquare}
-          legalMoves={legalMoves}
-          lastMove={lastMove}
-          flipped={isBoardFlipped}
-          squareSize={72}
-          onSquareClick={selectSquare}
-          onMove={handleMove}
-        />
-      </div>
+            {/* Chess Board */}
+            <div className="flex items-center">
+              {/* Desktop Evaluation Bar - now placed to the LEFT of the board */}
+              <div className="hidden lg:block mr-4">
+                <EvaluationBar score={evaluation} height={576} />
+              </div>
+              
+              <ChessBoard
+                gameState={gameState}
+                selectedSquare={selectedSquare}
+                legalMoves={legalMoves}
+                lastMove={lastMove}
+                flipped={isBoardFlipped}
+                squareSize={72}
+                onSquareClick={selectSquare}
+                onMove={handleMove}
+              />
+            </div>
 
-      {/* Bottom Player Info */}
-      <div className="flex items-center justify-between">
-        <CapturedPieces
-          pieces={isBoardFlipped ? gameState.capturedPieces.white : gameState.capturedPieces.black}
-          color={isBoardFlipped ? 'w' : 'b'}
-        />
-      </div>
+            {/* Bottom Player Info - Only show in PvP mode */}
+            {gameOptions.mode === 'pvp' && (
+              <div className="flex items-center justify-between">
+                <CapturedPieces
+                  pieces={isBoardFlipped ? gameState.capturedPieces.white : gameState.capturedPieces.black}
+                  color={isBoardFlipped ? 'w' : 'b'}
+                />
+              </div>
+            )}
 
             {/* Mobile Evaluation */}
             <div className="lg:hidden">
