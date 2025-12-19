@@ -1,4 +1,3 @@
-
 import { useState, useCallback, useEffect } from 'react';
 import { Color } from 'chess.js';
 import { useChessGame } from '@/hooks/useChessGame';
@@ -125,7 +124,7 @@ export function ChessGame() {
       <header className="border-b bg-card/50 backdrop-blur-sm sticky top-0 z-10">
         <div className="container mx-auto px-4 py-3 flex items-center justify-between">
           <h1 className="text-2xl font-display font-bold text-foreground">
-            Chess Master
+            E-Chess
           </h1>
           <div className="flex items-center gap-2">
             <Button
@@ -143,58 +142,62 @@ export function ChessGame() {
       </header>
 
       {/* Main Content */}
-      <main className="container mx-auto px-2 sm:px-4 py-4">
-        <div className="flex flex-col lg:flex-row gap-4 lg:gap-6 items-center lg:items-start justify-center">
-          {/* Evaluation Bar */}
-          <div className="hidden lg:block">
-            <EvaluationBar score={evaluation} height={480} />
-          </div>
+{/* Main Content */}
+<main className="container mx-auto px-4 py-6">
+  <div className="flex flex-col lg:flex-row gap-6 items-start justify-center">
+    {/* Chess Board Section */}
+    <div className="flex flex-col gap-4">
+      {/* Top Player Info */}
+      <div className="flex items-center justify-between">
+        <CapturedPieces
+          pieces={isBoardFlipped ? gameState.capturedPieces.black : gameState.capturedPieces.white}
+          color={isBoardFlipped ? 'b' : 'w'}
+        />
+        {gameOptions.timeControl && (
+          <ChessClock
+            whiteTime={whiteTime}
+            blackTime={blackTime}
+            turn={gameState.turn}
+            isRunning={isClockRunning}
+            flipped={isBoardFlipped}
+          />
+        )}
+      </div>
 
-          {/* Chess Board Section */}
-          <div className="flex flex-col gap-3 w-full max-w-[min(100vw-1rem,480px)] lg:max-w-none lg:w-auto">
-            {/* Top Player Info */}
-            <div className="flex items-center justify-between">
-              <CapturedPieces
-                pieces={isBoardFlipped ? gameState.capturedPieces.black : gameState.capturedPieces.white}
-                color={isBoardFlipped ? 'b' : 'w'}
-              />
-              {gameOptions.timeControl && (
-                <ChessClock
-                  whiteTime={whiteTime}
-                  blackTime={blackTime}
-                  turn={gameState.turn}
-                  isRunning={isClockRunning}
-                  flipped={isBoardFlipped}
-                />
-              )}
-            </div>
+      {/* Game Status */}
+      <GameStatus
+        status={gameState.status}
+        turn={gameState.turn}
+        winner={gameState.winner}
+        isCheck={gameState.isCheck}
+      />
 
-            {/* Game Status */}
-            <GameStatus
-              status={gameState.status}
-              turn={gameState.turn}
-              winner={gameState.winner}
-              isCheck={gameState.isCheck}
-            />
+      {/* Chess Board */}
+      <div className="flex items-center">
+        {/* Desktop Evaluation Bar - now placed to the LEFT of the board */}
+        <div className="hidden lg:block mr-4">
+          <EvaluationBar score={evaluation} height={576} />
+        </div>
+        
+        <ChessBoard
+          gameState={gameState}
+          selectedSquare={selectedSquare}
+          legalMoves={legalMoves}
+          lastMove={lastMove}
+          flipped={isBoardFlipped}
+          squareSize={72}
+          onSquareClick={selectSquare}
+          onMove={handleMove}
+        />
+      </div>
 
-            {/* Chess Board - Responsive sizing */}
-            <ChessBoard
-              gameState={gameState}
-              selectedSquare={selectedSquare}
-              legalMoves={legalMoves}
-              lastMove={lastMove}
-              flipped={isBoardFlipped}
-              onSquareClick={selectSquare}
-              onMove={handleMove}
-            />
-
-            {/* Bottom Player Info */}
-            <div className="flex items-center justify-between">
-              <CapturedPieces
-                pieces={isBoardFlipped ? gameState.capturedPieces.white : gameState.capturedPieces.black}
-                color={isBoardFlipped ? 'w' : 'b'}
-              />
-            </div>
+      {/* Bottom Player Info */}
+      <div className="flex items-center justify-between">
+        <CapturedPieces
+          pieces={isBoardFlipped ? gameState.capturedPieces.white : gameState.capturedPieces.black}
+          color={isBoardFlipped ? 'w' : 'b'}
+        />
+      </div>
 
             {/* Mobile Evaluation */}
             <div className="lg:hidden">
@@ -224,7 +227,7 @@ export function ChessGame() {
           </div>
 
           {/* Side Panel */}
-          <Card className="w-full lg:w-72 h-[300px] lg:h-[480px] p-4">
+          <Card className="w-full lg:w-80 h-[400px] lg:h-[576px] p-4">
             <h2 className="font-display font-semibold text-lg mb-3">Move History</h2>
             <div className="h-[calc(100%-2rem)]">
               <MoveHistory
