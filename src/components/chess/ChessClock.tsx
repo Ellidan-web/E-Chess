@@ -8,15 +8,13 @@ interface ChessClockProps {
   turn: Color;
   isRunning: boolean;
   flipped?: boolean;
-  isAiMode?: boolean; // optional flag to hide AI clock
-  playerColor?: Color; // player color in AI mode
 }
 
 function formatTime(seconds: number): string {
   const mins = Math.floor(seconds / 60);
   const secs = Math.floor(seconds % 60);
   const tenths = Math.floor((seconds % 1) * 10);
-
+  
   if (seconds < 10) {
     return `${mins}:${secs.toString().padStart(2, '0')}.${tenths}`;
   }
@@ -29,30 +27,7 @@ export const ChessClock = memo(function ChessClock({
   turn,
   isRunning,
   flipped = false,
-  isAiMode = false,
-  playerColor,
 }: ChessClockProps) {
-  // In AI mode, only show the player's clock
-  if (isAiMode && playerColor) {
-    const playerTime = playerColor === 'w' ? whiteTime : blackTime;
-    const isPlayerTurn = turn === playerColor;
-    
-    return (
-      <div className="flex flex-col items-center gap-2">
-        <div className="text-sm font-medium text-muted-foreground mb-1">
-          Your Clock
-        </div>
-        <ClockDisplay
-          time={playerTime}
-          color={playerColor}
-          isActive={isPlayerTurn && isRunning}
-          isLow={playerTime < 30}
-        />
-      </div>
-    );
-  }
-
-  // Normal mode (PVP) - show both clocks
   const topTime = flipped ? whiteTime : blackTime;
   const bottomTime = flipped ? blackTime : whiteTime;
   const topColor: Color = flipped ? 'w' : 'b';
