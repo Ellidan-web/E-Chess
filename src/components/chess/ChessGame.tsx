@@ -153,15 +153,7 @@ export function ChessGame() {
           pieces={isBoardFlipped ? gameState.capturedPieces.black : gameState.capturedPieces.white}
           color={isBoardFlipped ? 'b' : 'w'}
         />
-        {gameOptions.timeControl && (
-          <ChessClock
-            whiteTime={whiteTime}
-            blackTime={blackTime}
-            turn={gameState.turn}
-            isRunning={isClockRunning}
-            flipped={isBoardFlipped}
-          />
-        )}
+  
       </div>
 
       {/* Game Status */}
