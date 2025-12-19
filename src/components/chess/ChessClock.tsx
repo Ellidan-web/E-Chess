@@ -8,15 +8,13 @@ interface ChessClockProps {
   turn: Color;
   isRunning: boolean;
   flipped?: boolean;
-  isAiMode?: boolean; // optional flag to hide AI clock
-  playerColor?: Color; // player color in AI mode
 }
 
 function formatTime(seconds: number): string {
   const mins = Math.floor(seconds / 60);
   const secs = Math.floor(seconds % 60);
   const tenths = Math.floor((seconds % 1) * 10);
-
+  
   if (seconds < 10) {
     return `${mins}:${secs.toString().padStart(2, '0')}.${tenths}`;
   }
@@ -29,36 +27,26 @@ export const ChessClock = memo(function ChessClock({
   turn,
   isRunning,
   flipped = false,
-  isAiMode = false,
-  playerColor,
 }: ChessClockProps) {
   const topTime = flipped ? whiteTime : blackTime;
   const bottomTime = flipped ? blackTime : whiteTime;
   const topColor: Color = flipped ? 'w' : 'b';
   const bottomColor: Color = flipped ? 'b' : 'w';
 
-  // In AI mode, hide the AI's clock
-  const showTop = !(isAiMode && topColor !== playerColor);
-  const showBottom = !(isAiMode && bottomColor !== playerColor);
-
   return (
     <div className="flex flex-col gap-2">
-      {showTop && (
-        <ClockDisplay
-          time={topTime}
-          color={topColor}
-          isActive={turn === topColor && isRunning}
-          isLow={topTime < 30}
-        />
-      )}
-      {showBottom && (
-        <ClockDisplay
-          time={bottomTime}
-          color={bottomColor}
-          isActive={turn === bottomColor && isRunning}
-          isLow={bottomTime < 30}
-        />
-      )}
+      <ClockDisplay
+        time={topTime}
+        color={topColor}
+        isActive={turn === topColor && isRunning}
+        isLow={topTime < 30}
+      />
+      <ClockDisplay
+        time={bottomTime}
+        color={bottomColor}
+        isActive={turn === bottomColor && isRunning}
+        isLow={bottomTime < 30}
+      />
     </div>
   );
 });
