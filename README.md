@@ -13,16 +13,7 @@ Responsive & Accessible UI - In Progress
 Notifications & Sound	- In Progress
 
 Component Library – Reusable and accessible UI components (buttons, dialogs, navigation, etc.)
-
 Developer Experience – Preconfigured with Vite, Tailwind CSS, ESLint, and TypeScript
-
-## 🔄 Coming Soon
-
-Game Engine – Core chess logic, move validation, game state management, timers
-
-Responsive & Accessible UI – Mobile-friendly hooks and inclusive components
-
-Notifications & Sound – Toast notifications and sound effects for enhanced user feedback
 
 ## 📁 Project Structure
 ```
@@ -108,28 +99,19 @@ E-Chess includes a built-in testing setup. Run tests with:
 
 npm test
 ##  🛠 Built With
-
 React – UI library
-
 TypeScript – Type safety
-
 Vite – Fast build tooling
-
 Tailwind CSS – Utility-first styling
-
 ESLint – Code quality and consistency
-
 UI Components – Custom library inspired by shadcn/ui
 
 ##  📄 License
-
 This project is licensed under the MIT License. See the LICENSE file for details.
 
 ## 🤝 Contributing
-
 Contributions are welcome!
-
 Open an issue for bugs or feature requests
-
 Submit a pull request for improvements
+
 
