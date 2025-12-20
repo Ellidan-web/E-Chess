@@ -100,10 +100,15 @@ E-Chess includes a built-in testing setup. Run tests with:
 npm test
 ##  🛠 Built With
 React – UI library
+
 TypeScript – Type safety
+
 Vite – Fast build tooling
+
 Tailwind CSS – Utility-first styling
+
 ESLint – Code quality and consistency
+
 UI Components – Custom library inspired by shadcn/ui
 
 ##  📄 License
@@ -113,5 +118,6 @@ This project is licensed under the MIT License. See the LICENSE file for details
 Contributions are welcome!
 Open an issue for bugs or feature requests
 Submit a pull request for improvements
+
 
 
