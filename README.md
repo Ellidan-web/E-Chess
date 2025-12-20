@@ -1,10 +1,10 @@
-# ♟️ E-Chess – Developer Chess Toolkit
+# E-Chess – Developer Chess Toolkit
 
-## 📖 Overview
+## Overview
 
 E-Chess is a modern developer toolkit for building interactive, scalable chess applications using React and TypeScript. It provides a clean development environment, a rich set of reusable UI components, and an evolving chess game engine—allowing developers to focus on crafting high-quality chess experiences.
 
-## ✨ Features & Status
+## Features & Status
 Feature	Status
 Component Library - Ready
 Developer Experience - Ready
@@ -15,7 +15,7 @@ Notifications & Sound	- In Progress
 Component Library – Reusable and accessible UI components (buttons, dialogs, navigation, etc.)
 Developer Experience – Preconfigured with Vite, Tailwind CSS, ESLint, and TypeScript
 
-## 📁 Project Structure
+## Project Structure
 ```
 E-Chess/
 ├── public/                    # Static assets
@@ -59,41 +59,22 @@ E-Chess/
 ├── vite.config.ts
 └── README.md
 ```
-## 📦 Getting Started
-Prerequisites
+## Getting Started
 
-Node.js – Latest LTS recommended
+Prerequisites: Node.js (latest LTS), npm or bun
 
-Package Manager – npm or bun
-
-Language – TypeScript
-
-Installation
-
-Clone the repository:
+Installation:
 
 git clone https://github.com/Ellidan-web/E-Chess
-
-Navigate to the project directory:
-
 cd E-Chess
+npm install    # or bun install
 
-Install dependencies:
 
-npm install
-# or
-bun install
-##  🎮 Usage
+Start Development Server:
 
-Start the development server:
+npm run dev   
 
-npm run dev
-# or
-npm start
-
-The app will be available at http://localhost:5173 by default.
-
-##  🧪 Testing
+##  Testing
 
 E-Chess includes a built-in testing setup. Run tests with:
 
@@ -111,13 +92,14 @@ ESLint – Code quality and consistency
 
 UI Components – Custom library inspired by shadcn/ui
 
-##  📄 License
+##  License
 This project is licensed under the MIT License. See the LICENSE file for details.
 
-## 🤝 Contributing
+## Contributing
 Contributions are welcome!
 Open an issue for bugs or feature requests
 Submit a pull request for improvements
+
 
 
 
