@@ -79,7 +79,7 @@ npm run dev
 E-Chess includes a built-in testing setup. Run tests with:
 
 npm test
-##  🛠 Built With
+##  Built With
 React – UI library
 
 TypeScript – Type safety
@@ -99,6 +99,7 @@ This project is licensed under the MIT License. See the LICENSE file for details
 Contributions are welcome!
 Open an issue for bugs or feature requests
 Submit a pull request for improvements
+
 
 
 
