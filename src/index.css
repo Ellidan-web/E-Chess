@@ -7,8 +7,8 @@
 @layer base {
   :root {
     /* Chess board colors */
-    --square-light: 43 31% 80%;
-    --square-dark: 30 35% 35%;
+    --square-light: 0 0% 100%;
+    --square-dark: 120 60% 40%;
     --square-highlight: 45 100% 50%;
     --square-move: 120 60% 50%;
     --square-check: 0 80% 55%;
@@ -63,8 +63,8 @@
   }
   
   .dark {
-    --square-light: 43 20% 55%;
-    --square-dark: 30 30% 22%;
+    --square-light: 0 0% 95%;
+    --square-dark: 120 50% 35%;
     --square-highlight: 45 100% 45%;
     --square-move: 120 50% 40%;
     --square-check: 0 70% 45%;
