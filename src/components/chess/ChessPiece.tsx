@@ -14,7 +14,58 @@ const ChessPieceSVGs: Record<PieceSymbol, (color: string) => React.ReactNode> = 
     <svg viewBox="0 0 100 100" className="w-full h-full">
       <g fill={color} stroke="#000" strokeWidth="1.5" strokeLinejoin="round">
         {/* Base */}
-        <path d="M 25 85 Q 20 80 20 70 L 20 50 Q 20 40 30 35 L 70 35 Q 80 40 80 50 L 80 70 Q 80 80 75 85 Z"/>
+        <path d="M 25 85 Q 20 80 20 70 L 20 50 Q 20 40 30 35 L 70 35 Qimport { memo } from 'react';
+import { PieceSymbol, Color } from 'chess.js';
+
+interface ChessPieceProps {
+  type: PieceSymbol;
+  color: Color;
+  size?: number;
+  isDragging?: boolean;
+}
+
+const PIECE_UNICODE: Record<Color, Record<PieceSymbol, string>> = {
+  w: {
+    k: '♔',
+    q: '♕',
+    r: '♖',
+    b: '♗',
+    n: '♘',
+    p: '♙',
+  },
+  b: {
+    k: '♚',
+    q: '♛',
+    r: '♜',
+    b: '♝',
+    n: '♞',
+    p: '♟',
+  },
+};
+
+export const ChessPiece = memo(function ChessPiece({
+  type,
+  color,
+  size = 64,
+  isDragging = false,
+}: ChessPieceProps) {
+  return (
+    <div
+      className={`chess-piece select-none ${isDragging ? 'chess-piece-dragging' : ''}`}
+      style={{
+        fontSize: size * 0.8,
+        lineHeight: 1,
+        color: color === 'w' ? '#fff' : '#1a1a1a',
+        textShadow: color === 'w' 
+          ? '0 2px 4px rgba(0,0,0,0.4), 0 0 1px rgba(0,0,0,0.8)' 
+          : '0 2px 4px rgba(0,0,0,0.3)',
+        WebkitTextStroke: color === 'w' ? '1px rgba(0,0,0,0.3)' : '1px rgba(255,255,255,0.1)',
+      }}
+    >
+      {PIECE_UNICODE[color][type]}
+    </div>
+  );
+}); 80 40 80 50 L 80 70 Q 80 80 75 85 Z"/>
         {/* Shaft */}
         <rect x="40" y="25" width="20" height="15" fill={color} stroke="#000" strokeWidth="1.5"/>
         {/* Cross on top */}
