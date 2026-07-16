@@ -39,11 +39,11 @@ export const ChessPiece = memo(function ChessPiece({
       style={{
         fontSize: size * 0.8,
         lineHeight: 1,
-        color: color === 'w' ? '#fff' : '#1a1a1a',
+        color: color === 'w' ? '#ffffff' : '#000000',
         textShadow: color === 'w' 
-          ? '0 2px 4px rgba(0,0,0,0.4), 0 0 1px rgba(0,0,0,0.8)' 
-          : '0 2px 4px rgba(0,0,0,0.3)',
-        WebkitTextStroke: color === 'w' ? '1px rgba(0,0,0,0.3)' : '1px rgba(255,255,255,0.1)',
+          ? '2px 2px 4px rgba(0,0,0,0.6), 0 0 2px rgba(0,0,0,0.8)' 
+          : '2px 2px 4px rgba(255,255,255,0.6), 0 0 2px rgba(255,255,255,0.8)',
+        WebkitTextStroke: color === 'w' ? '1.5px rgba(0,0,0,0.5)' : '1.5px rgba(255,255,255,0.5)',
       }}
     >
       {PIECE_UNICODE[color][type]}
