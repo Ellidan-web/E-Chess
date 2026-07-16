@@ -6,9 +6,9 @@
 
 @layer base {
   :root {
-    /* Chess board colors */
-    --square-light: 0 0% 100%;
-    --square-dark: 120 60% 40%;
+    /* Chess board colors - Light Brown Theme */
+    --square-light: 35 45% 82%;    /* Light warm beige */
+    --square-dark: 30 40% 45%;     /* Rich medium brown */
     --square-highlight: 45 100% 50%;
     --square-move: 120 60% 50%;
     --square-check: 0 80% 55%;
@@ -46,7 +46,7 @@
     --radius: 0.75rem;
     
     /* Chess specific */
-    --piece-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    --piece-shadow: 0 4px 8px rgba(0, 0, 0, 0.35);
     --board-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
     --evaluation-white: 0 0% 95%;
     --evaluation-black: 0 0% 15%;
@@ -63,8 +63,9 @@
   }
   
   .dark {
-    --square-light: 0 0% 95%;
-    --square-dark: 120 50% 35%;
+    /* Dark mode - Warm darker browns */
+    --square-light: 35 35% 55%;    /* Muted warm beige */
+    --square-dark: 30 35% 28%;     /* Deep warm brown */
     --square-highlight: 45 100% 45%;
     --square-move: 120 50% 40%;
     --square-check: 0 70% 45%;
@@ -172,7 +173,7 @@
   }
   
   .chess-piece {
-    filter: drop-shadow(2px 4px 4px rgba(0, 0, 0, 0.3));
+    filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.4));
     transition: transform 0.15s ease-out;
     cursor: grab;
   }
